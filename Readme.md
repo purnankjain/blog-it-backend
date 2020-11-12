@@ -26,3 +26,17 @@ Steps to start the project
 
 - Run the command `npm start`. The project is defaulted to start on port `8080`.
 - To check whether the project is running or not, you can go to the browser and hit the url `localhost:8080/alive`. This should return you `I'm Alive`, if the project is running correctly
+
+
+APIS
+----
+
+- `/posts` - _GET_ - Used to get all Posts
+- `/posts/{:postId}` - _GET_ - Used to get specific Post
+- `/posts` - _POST_ - Used to create a Post
+  **Requeset**
+  - imageId
+  - title
+  - content
+- `/images` - _POST_ - Used to upload an image
+- `/images/{:imageId}` - _GET_ - Used to get a specific image
