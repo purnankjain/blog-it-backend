@@ -39,4 +39,6 @@ APIS
   - title
   - content
 - `/images` - _POST_ - Used to upload an image
+  **Request**
+  - image
 - `/images/{:imageId}` - _GET_ - Used to get a specific image
