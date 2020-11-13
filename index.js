@@ -5,6 +5,7 @@ var mysql = require('mysql');
 var bodyParser = require('body-parser');
 const CONSTANTS = require('./constants');
 const IMAGE_SERVICE = require('./ImageService');
+const cors = require('cors')
 
 const app = express()
 const port = 8080
@@ -22,6 +23,7 @@ app.use(fileUpload({
   createParentPath: true
 }));
 app.use(bodyParser.json())
+app.use(cors())
 
 app.get('/alive', (req, res) => {
   res.send("I'm Alive")
@@ -31,6 +33,17 @@ app.get('/posts/:postId', (req, res) => {
   try {
     const { postId } = req.params
     POSTS_SERVICE.getPostById(connection, res, postId)
+  } catch (err) {
+    console.log({ err });
+    res.sendStatus(500)
+  }
+})
+
+app.put('/posts/:postId', (req, res) => {
+  try {
+    const { postId } = req.params
+    const { imageId, content, title } = req.body
+    POSTS_SERVICE.updatePost(connection, res, postId, imageId, title, content)
   } catch (err) {
     console.log({ err });
     res.sendStatus(500)
@@ -53,6 +66,16 @@ app.post('/posts', (req, res) => {
   }
   catch (err) {
     console.log(err);
+    res.sendStatus(500)
+  }
+})
+
+app.delete('/posts/:postId', (req, res) => {
+  try {
+    const { postId } = req.params
+    POSTS_SERVICE.deletePost(connection, res, postId)
+  } catch (err) {
+    console.log({ err });
     res.sendStatus(500)
   }
 })

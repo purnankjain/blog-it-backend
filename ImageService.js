@@ -19,7 +19,7 @@ const addImage = (connection, res, image) => {
         return
       }
       res.status(201)
-      res.send(result)
+      res.send(result[0])
     })
   })
 }
